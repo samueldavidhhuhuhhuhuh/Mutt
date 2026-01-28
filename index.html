@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutt - Alimento Natural para Mascotas</title>
+    <!-- Vinculamos la hoja de estilos externa -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicon (opcional, si tienes uno) -->
+    <!-- <link rel="icon" href="favicon.ico"> -->
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-placeholder">
+            <!-- Logo GIF animado desde la carpeta images -->
+            <img src="images/Mutt-Web-Header-Logo.gif" alt="Logo Mutt" onerror="this.style.display='none'; this.parentElement.innerText='LOGO MUTT'">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero / Portada -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Alimento Natural Cocido con Amor</h1>
+            <p>Nutrición real para perros y gatos. Sin conservantes, solo salud.</p>
+            <a href="#productos" class="cta-button">Ver Menú</a>
+        </div>
+    </section>
+
+    <!-- Sección Principal de Productos -->
+    <section id="productos">
+        <!-- Filtros de Categoría -->
+        <div class="category-filter">
+            <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('Tabletas')">Tabletas</button>
+            <button class="filter-btn" onclick="filterProducts('Huellitas')">Huellitas</button>
+            <button class="filter-btn" onclick="filterProducts('Canittas')">Canittas</button>
+            <button class="filter-btn" onclick="filterProducts('Gatos')">Gatos</button>
+        </div>
+
+        <!-- Grid (Rejilla) donde JS inyectará los productos -->
+        <div class="products-container" id="product-grid">
+            <!-- Los productos se cargan dinámicamente desde script.js -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Mutt Comida de Mascotas. Hecho con amor.</p>
+    </footer>
+
+    <!-- Vinculamos el archivo de lógica Javascript al final del body -->
+    <script src="script.js"></script>
+</body>
+</html>
