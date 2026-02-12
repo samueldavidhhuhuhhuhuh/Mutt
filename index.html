@@ -4,18 +4,348 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutt - Alimento Natural para Mascotas</title>
-    <!-- Vinculamos la hoja de estilos externa -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- Favicon (opcional, si tienes uno) -->
-    <!-- <link rel="icon" href="favicon.ico"> -->
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES DEL MANUAL DE MARCA --- */
+        :root {
+            /* Colores Base */
+            --brand-green: #5d7239;   /* Tablettas */
+            --brand-red: #c64630;     /* Huellittas / Res */
+            --brand-blue: #4c8aee;    /* Snacks / Delicias del Mar */
+            --brand-brown: #8a6a3a;   /* Festín de Pollo */
+            --brand-orange: #f77f00;  /* Hover del Botón / Acento */
+            
+            /* Tipografía y Textos */
+            --color-titles: #222222;  /* Subtítulos */
+            --color-text: #939393;    /* Textos generales */
+            
+            /* Fuentes */
+            --font-titles: 'Quicksand', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+
+            /* Estilos generales */
+            --light-bg: #F9F9F9;
+            --white: #FFFFFF;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        /* --- RESET & BASICS --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--color-text);
+            font-family: var(--font-body); /* DM Sans para textos */
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- TIPOGRAFÍA --- */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-titles); /* Quicksand para títulos */
+            color: var(--color-titles);
+            font-weight: 700;
+        }
+
+        a, button, .filter-btn, .tag-text {
+            font-family: var(--font-titles);
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background-color: var(--white);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--brand-orange); /* Detalle de color header */
+        }
+
+        .logo-placeholder {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            font-family: var(--font-titles);
+            font-weight: 800;
+            color: var(--brand-green);
+            font-size: 1.5rem;
+        }
+
+        .logo-placeholder img {
+            max-height: 100%;
+            width: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-titles);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--brand-orange);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem; /* Títulos grandes como en el manual */
+            margin-bottom: 1rem;
+            color: var(--white);
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            color: #f0f0f0;
+        }
+
+        .cta-button {
+            background-color: var(--brand-green);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+            display: inline-block;
+            font-family: var(--font-titles);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-color: var(--brand-orange); /* Hover especificado en manual */
+        }
+
+        /* --- FILTROS DE CATEGORÍA --- */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 40px 20px;
+            flex-wrap: wrap;
+            background-color: var(--white);
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid var(--brand-orange);
+            background: transparent;
+            color: var(--brand-orange);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--brand-orange);
+            color: var(--white);
+        }
+
+        /* --- GRID DE PRODUCTOS --- */
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid #eee;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--brand-orange);
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Etiquetas de Sabor (Colores específicos del manual) */
+        .meat-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            color: white;
+            font-family: var(--font-titles);
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        /* Mapeo de colores según manual */
+        .tag-pollo { background-color: var(--brand-brown); } /* Festín de Pollo */
+        .tag-res { background-color: var(--brand-red); }     /* Deleite de Res */
+        .tag-cerdo { background-color: var(--brand-orange); } /* Capricho Porcino (aprox al naranja/amarillo) */
+        .tag-atun, .tag-salmon { background-color: var(--brand-blue); } /* Delicias del Mar */
+
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--brand-green); /* Títulos en Verde Mutt */
+            font-weight: 700;
+        }
+
+        .product-desc {
+            font-size: 1rem;
+            color: var(--color-text); /* Color #939393 */
+            margin-bottom: 20px;
+            font-family: var(--font-body);
+        }
+
+        .variant-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--color-titles);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .variant-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            background-color: #fff;
+            cursor: pointer;
+            font-family: var(--font-body);
+            color: var(--color-text);
+        }
+        
+        .variant-select:focus {
+            outline: none;
+            border-color: var(--brand-orange);
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--brand-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background-color: var(--brand-orange); /* Hover del botón #f77f00 */
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--white);
+            color: var(--color-text);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            border-top: 5px solid var(--brand-green);
+        }
+        
+        footer p {
+            color: var(--color-text);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .category-filter { gap: 10px; }
+            .filter-btn { padding: 8px 16px; font-size: 0.9rem; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <div class="logo-placeholder">
-            <!-- Logo GIF animado desde la carpeta images -->
-            <img src="images/Mutt-Web-Header-Logo.gif" alt="Logo Mutt" onerror="this.style.display='none'; this.parentElement.innerText='LOGO MUTT'">
+            <img src="images/Mutt-Web-Header-Logo.gif" alt="Logo Mutt" onerror="this.style.display='none'; this.parentElement.innerText='MUTT'">
         </div>
         <nav>
             <ul>
@@ -26,7 +356,6 @@
         </nav>
     </header>
 
-    <!-- Hero / Portada -->
     <section class="hero">
         <div class="hero-content">
             <h1>Alimento Natural Cocido con Amor</h1>
@@ -35,9 +364,7 @@
         </div>
     </section>
 
-    <!-- Sección Principal de Productos -->
     <section id="productos">
-        <!-- Filtros de Categoría -->
         <div class="category-filter">
             <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
             <button class="filter-btn" onclick="filterProducts('Tabletas')">Tabletas</button>
@@ -46,18 +373,231 @@
             <button class="filter-btn" onclick="filterProducts('Gatos')">Gatos</button>
         </div>
 
-        <!-- Grid (Rejilla) donde JS inyectará los productos -->
         <div class="products-container" id="product-grid">
-            <!-- Los productos se cargan dinámicamente desde script.js -->
-        </div>
+            </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Mutt Comida de Mascotas. Hecho con amor.</p>
     </footer>
 
-    <!-- Vinculamos el archivo de lógica Javascript al final del body -->
-    <script src="script.js"></script>
+    <script>
+        const products = [
+            // --- LÍNEA TABLETAS ---
+            { 
+                id: 't-pollo',
+                category: 'Tabletas', 
+                name: 'Tableta de Pollo', 
+                flavor: 'pollo', 
+                desc: 'Deliciosa tableta rica en proteína magra.',
+                variants: ['250', '500', '1000'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Pollo-500.jpg',
+                imageBase: 'images/Mutt-Prods-BazzarBog-Pollo-',
+                isDynamic: true 
+            },
+            { 
+                id: 't-res',
+                category: 'Tabletas', 
+                name: 'Tableta de Res', 
+                flavor: 'res', 
+                desc: 'Energía pura con carne de res seleccionada.',
+                variants: ['250', '500', '1000'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Res-500.jpg',
+                imageBase: 'images/Mutt-Prods-BazzarBog-Res-',
+                isDynamic: true 
+            },
+            { 
+                id: 't-cerdo',
+                category: 'Tabletas', 
+                name: 'Tableta de Cerdo', 
+                flavor: 'cerdo', 
+                desc: 'Sabor irresistible y alta palatabilidad.',
+                variants: ['250', '500', '1000'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Cerdo-500.jpg',
+                imageBase: 'images/Mutt-Prods-BazzarBog-Cerdo-',
+                isDynamic: true 
+            },
+            { 
+                id: 't-atun',
+                category: 'Tabletas', 
+                name: 'Tableta de Atún', 
+                flavor: 'atun', 
+                desc: 'Omega 3 natural para pelaje brillante.',
+                variants: ['250', '500', '1000'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Atun-500.jpg',
+                imageBase: 'images/Mutt-Prods-BazzarBog-Atun-',
+                isDynamic: true 
+            },
+            { 
+                id: 't-salmon',
+                category: 'Tabletas', 
+                name: 'Tableta de Salmón', 
+                flavor: 'salmon', 
+                desc: 'Lo mejor del mar para tu mascota.',
+                variants: ['250', '500', '1000'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Salmon-500.jpg',
+                imageBase: 'images/Mutt-Prods-BazzarBog-Salmon-',
+                isDynamic: true 
+            },
+
+            // --- LÍNEA HUELLITAS ---
+            { 
+                id: 'h-pollo',
+                category: 'Huellitas', 
+                name: 'Huellitas de Pollo', 
+                flavor: 'pollo', 
+                desc: 'Formas divertidas, el mismo gran sabor.',
+                variants: ['400'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Huellitas-Pollo.jpg',
+                isDynamic: false 
+            },
+            { 
+                id: 'h-res',
+                category: 'Huellitas', 
+                name: 'Huellitas de Res', 
+                flavor: 'res', 
+                desc: 'Snack saludable o comida completa.',
+                variants: ['400'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Huellitas-Res.jpg',
+                isDynamic: false 
+            },
+            { 
+                id: 'h-cerdo',
+                category: 'Huellitas', 
+                name: 'Huellitas de Cerdo', 
+                flavor: 'cerdo', 
+                desc: 'Premia a tu mascota con salud.',
+                variants: ['400'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Huellitas-Cerdo.jpg',
+                isDynamic: false 
+            },
+
+            // --- LÍNEA CANITTAS ---
+            { 
+                id: 'c-pollo',
+                category: 'Canittas', 
+                name: 'Canittas de Pollo', 
+                flavor: 'pollo', 
+                desc: 'Textura suave, ideal para todas las edades.',
+                variants: ['250', '500'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Canittas-Pollo-250.jpg',
+                imageBase: 'images/Mutt-Prods-BazzarBog-Canittas-Pollo-',
+                isDynamic: true 
+            },
+            { 
+                id: 'c-res',
+                category: 'Canittas', 
+                name: 'Canittas de Res', 
+                flavor: 'res', 
+                desc: 'Nutrición balanceada en cada bocado.',
+                variants: ['250', '500'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Canittas-Res-250.jpg',
+                imageBase: 'images/Mutt-Prods-BazzarBog-Canittas-Res-',
+                isDynamic: true 
+            },
+
+            // --- LÍNEA GATOS ---
+            { 
+                id: 'g-banquete',
+                category: 'Gatos', 
+                name: 'Banquete Felino', 
+                flavor: 'salmon', 
+                desc: 'Especialmente formulado para gatos exigentes.',
+                variants: ['250'],
+                imageDefault: 'images/Mutt-Prods-BazzarBog-Gattos-BanqueteFelino-250g.jpg',
+                isDynamic: false 
+            },
+        ];
+
+        const grid = document.getElementById('product-grid');
+
+        /**
+         * Función principal para renderizar productos
+         */
+        function renderProducts(filter) {
+            grid.innerHTML = ''; 
+
+            const filtered = filter === 'all' 
+                ? products 
+                : products.filter(p => p.category === filter);
+
+            filtered.forEach(product => {
+                let optionsHtml = product.variants.map(v => 
+                    `<option value="${v}">${v}g</option>`
+                ).join('');
+
+                const onSelectChange = product.isDynamic 
+                    ? `onchange="changeProductImage('${product.id}', '${product.imageBase}', this.value)"` 
+                    : '';
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                
+                card.innerHTML = `
+                    <div class="img-placeholder">
+                        <span class="meat-tag tag-${product.flavor}">${product.flavor}</span>
+                        <img 
+                            src="${product.imageDefault}" 
+                            alt="${product.name}" 
+                            id="img-${product.id}"
+                            onerror="this.style.display='none'; this.parentElement.innerText='Imagen no encontrada'"
+                        >
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-desc">${product.desc}</p>
+                        </div>
+                        <div>
+                            <label class="variant-label">Selecciona presentación:</label>
+                            <select class="variant-select" id="select-${product.id}" ${onSelectChange}>
+                                ${optionsHtml}
+                            </select>
+                            <button class="add-btn" onclick="addToCart('${product.name}', '${product.id}')">
+                                Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        /**
+         * Función para cambiar la imagen dinámicamente
+         */
+        function changeProductImage(productId, imageBase, weight) {
+            const imgElement = document.getElementById(`img-${productId}`);
+            if (imgElement) {
+                const newSrc = `${imageBase}${weight}.jpg`;
+                imgElement.src = newSrc;
+            }
+        }
+
+        /**
+         * Filtro de categorías
+         */
+        function filterProducts(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderProducts(category);
+        }
+
+        /**
+         * Carrito
+         */
+        function addToCart(productName, productId) {
+            const select = document.getElementById(`select-${productId}`);
+            const presentation = select.value + 'g';
+            alert(`¡Genial! Has añadido al carrito:\n\n${productName}\nPresentación: ${presentation}`);
+        }
+
+        // Carga inicial
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts('all');
+        });
+    </script>
 </body>
 </html>
