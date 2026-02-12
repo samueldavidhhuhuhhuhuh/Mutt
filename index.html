@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutt - Alimento Natural para Mascotas</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --brand-green: #5d7239;
@@ -26,31 +24,22 @@
             --radius: 12px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--light-bg);
             color: var(--color-text);
             font-family: var(--font-body);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--font-titles);
             color: var(--color-titles);
             font-weight: 700;
-        }
-
-        a, button, .filter-btn, .tag-text {
-            font-family: var(--font-titles);
         }
 
         header {
@@ -76,16 +65,11 @@
             font-size: 1.5rem;
         }
 
-        .logo-placeholder img {
-            max-height: 100%;
-            width: auto;
-        }
+        .logo-placeholder img { max-height: 100%; width: auto; }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
+        nav { display: flex; align-items: center; gap: 30px; }
+
+        nav ul { list-style: none; display: flex; gap: 20px; }
 
         nav a {
             text-decoration: none;
@@ -94,8 +78,32 @@
             transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: var(--brand-orange);
+        nav a:hover { color: var(--brand-orange); }
+
+        .cart-trigger {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--brand-red);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
         }
 
         .hero {
@@ -117,15 +125,9 @@
             color: var(--white);
             text-transform: uppercase;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            letter-spacing: 1px;
         }
 
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            font-weight: 500;
-            color: #f0f0f0;
-        }
+        .hero p { font-size: 1.5rem; margin-bottom: 2rem; font-weight: 500; }
 
         .cta-button {
             background-color: var(--brand-green);
@@ -137,13 +139,9 @@
             font-weight: bold;
             transition: transform 0.3s, background-color 0.3s;
             display: inline-block;
-            font-family: var(--font-titles);
         }
 
-        .cta-button:hover {
-            transform: scale(1.05);
-            background-color: var(--brand-orange);
-        }
+        .cta-button:hover { transform: scale(1.05); background-color: var(--brand-orange); }
 
         .category-filter {
             display: flex;
@@ -167,10 +165,7 @@
             transition: all 0.3s;
         }
 
-        .filter-btn.active, .filter-btn:hover {
-            background-color: var(--brand-orange);
-            color: var(--white);
-        }
+        .filter-btn.active, .filter-btn:hover { background-color: var(--brand-orange); color: var(--white); }
 
         .products-container {
             max-width: 1200px;
@@ -193,11 +188,6 @@
             border: 1px solid #eee;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--brand-orange);
-        }
-
         .img-placeholder {
             width: 100%;
             height: 250px;
@@ -205,17 +195,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #777;
-            font-size: 1.2rem;
             position: relative;
-            overflow: hidden;
         }
 
-        .img-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
 
         .meat-tag {
             position: absolute;
@@ -224,11 +207,9 @@
             padding: 6px 14px;
             border-radius: 20px;
             color: white;
-            font-family: var(--font-titles);
-            font-weight: bold;
             font-size: 0.85rem;
             text-transform: uppercase;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-weight: bold;
             z-index: 10;
         }
 
@@ -237,35 +218,11 @@
         .tag-cerdo { background-color: var(--brand-orange); }
         .tag-atun, .tag-salmon { background-color: var(--brand-blue); }
 
-        .card-body {
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+        .card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 
-        .product-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--brand-green);
-            font-weight: 700;
-        }
+        .product-title { font-size: 1.5rem; margin-bottom: 10px; color: var(--brand-green); }
 
-        .product-desc {
-            font-size: 1rem;
-            color: var(--color-text);
-            margin-bottom: 20px;
-            font-family: var(--font-body);
-        }
-
-        .variant-label {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--color-titles);
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
+        .product-desc { font-size: 1rem; color: var(--color-text); margin-bottom: 20px; }
 
         .variant-select {
             width: 100%;
@@ -273,16 +230,7 @@
             border-radius: 8px;
             border: 1px solid #ddd;
             margin-bottom: 15px;
-            font-size: 1rem;
-            background-color: #fff;
-            cursor: pointer;
             font-family: var(--font-body);
-            color: var(--color-text);
-        }
-        
-        .variant-select:focus {
-            outline: none;
-            border-color: var(--brand-orange);
         }
 
         .add-btn {
@@ -292,34 +240,98 @@
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.2s;
         }
 
-        .add-btn:hover {
-            background-color: var(--brand-orange);
+        .add-btn:hover { background-color: var(--brand-orange); }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
+
+        .cart-drawer.open { right: 0; }
+
+        .cart-header {
+            padding: 20px;
+            background: var(--brand-green);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cart { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        .cart-items { flex-grow: 1; padding: 20px; overflow-y: auto; }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info h4 { font-size: 0.9rem; }
+        .cart-item-info p { font-size: 0.8rem; color: var(--color-text); }
+
+        .cart-item-actions { display: flex; align-items: center; gap: 10px; }
+
+        .qty-btn { background: #eee; border: none; width: 25px; height: 25px; border-radius: 4px; cursor: pointer; }
+
+        .cart-footer { padding: 20px; border-top: 2px solid #eee; }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--brand-orange);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1500;
+        }
+
+        .cart-overlay.open { display: block; }
 
         footer {
             background-color: var(--white);
-            color: var(--color-text);
             text-align: center;
             padding: 40px 20px;
             margin-top: 50px;
-            font-size: 0.9rem;
             border-top: 5px solid var(--brand-green);
-        }
-        
-        footer p {
-            color: var(--color-text);
         }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
-            .category-filter { gap: 10px; }
-            .filter-btn { padding: 8px 16px; font-size: 0.9rem; }
+            .cart-drawer { width: 100%; right: -100%; }
         }
     </style>
 </head>
@@ -331,10 +343,26 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">Contacto</a></li> <!-- COLOCAR LA REFERENCIA PARA REDIRECCION-->
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
             </ul>
+            <button class="cart-trigger" onclick="toggleCart()">
+                🛒 <span class="cart-count" id="cart-count">0</span>
+            </button>
         </nav>
     </header>
+
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Tu Pedido</h3>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <button class="checkout-btn" onclick="sendWhatsApp()">Pedir por WhatsApp</button>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="hero-content">
@@ -352,7 +380,6 @@
             <button class="filter-btn" onclick="filterProducts('Canittas')">Canittas</button>
             <button class="filter-btn" onclick="filterProducts('Gatos')">Gatos</button>
         </div>
-
         <div class="products-container" id="product-grid"></div>
     </section>
 
@@ -362,22 +389,23 @@
 
     <script>
         const products = [
-            { id: 't-pollo', category: 'Tabletas', name: 'Tableta de Pollo', flavor: 'pollo', desc: 'Deliciosa tableta rica en proteína magra.', variants: ['250', '500', '1000'], imageDefault: 'images/Mutt-Prods-BazzarBog-Pollo-500.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Pollo-', isDynamic: true },
-            { id: 't-res', category: 'Tabletas', name: 'Tableta de Res', flavor: 'res', desc: 'Energía pura con carne de res seleccionada.', variants: ['250', '500', '1000'], imageDefault: 'images/Mutt-Prods-BazzarBog-Res-500.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Res-', isDynamic: true },
-            { id: 't-cerdo', category: 'Tabletas', name: 'Tableta de Cerdo', flavor: 'cerdo', desc: 'Sabor irresistible y alta palatabilidad.', variants: ['250', '500', '1000'], imageDefault: 'images/Mutt-Prods-BazzarBog-Cerdo-500.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Cerdo-', isDynamic: true },
-            { id: 't-atun', category: 'Tabletas', name: 'Tableta de Atún', flavor: 'atun', desc: 'Omega 3 natural para pelaje brillante.', variants: ['250', '500', '1000'], imageDefault: 'images/Mutt-Prods-BazzarBog-Atun-500.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Atun-', isDynamic: true },
+            { id: 't-pollo', category: 'Tabletas', name: 'Tableta de Pollo', flavor: 'pollo', desc: 'Proteína magra de alta calidad.', variants: ['250', '500', '1000'], imageDefault: 'images/Mutt-Prods-BazzarBog-Pollo-500.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Pollo-', isDynamic: true },
+            { id: 't-res', category: 'Tabletas', name: 'Tableta de Res', flavor: 'res', desc: 'Energía pura con carne seleccionada.', variants: ['250', '500', '1000'], imageDefault: 'images/Mutt-Prods-BazzarBog-Res-500.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Res-', isDynamic: true },
+            { id: 't-cerdo', category: 'Tabletas', name: 'Tableta de Cerdo', flavor: 'cerdo', desc: 'Sabor irresistible y nutritivo.', variants: ['250', '500', '1000'], imageDefault: 'images/Mutt-Prods-BazzarBog-Cerdo-500.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Cerdo-', isDynamic: true },
+            { id: 't-atun', category: 'Tabletas', name: 'Tableta de Atún', flavor: 'atun', desc: 'Omega 3 para un pelaje brillante.', variants: ['250', '500', '1000'], imageDefault: 'images/Mutt-Prods-BazzarBog-Atun-500.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Atun-', isDynamic: true },
             { id: 't-salmon', category: 'Tabletas', name: 'Tableta de Salmón', flavor: 'salmon', desc: 'Lo mejor del mar para tu mascota.', variants: ['250', '500', '1000'], imageDefault: 'images/Mutt-Prods-BazzarBog-Salmon-500.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Salmon-', isDynamic: true },
-            { id: 'h-pollo', category: 'Huellitas', name: 'Huellitas de Pollo', flavor: 'pollo', desc: 'Formas divertidas, el mismo gran sabor.', variants: ['400'], imageDefault: 'images/Mutt-Prods-BazzarBog-Huellitas-Pollo.jpg', isDynamic: false },
+            { id: 'h-pollo', category: 'Huellitas', name: 'Huellitas de Pollo', flavor: 'pollo', desc: 'Formas divertidas, gran sabor.', variants: ['400'], imageDefault: 'images/Mutt-Prods-BazzarBog-Huellitas-Pollo.jpg', isDynamic: false },
             { id: 'h-res', category: 'Huellitas', name: 'Huellitas de Res', flavor: 'res', desc: 'Snack saludable o comida completa.', variants: ['400'], imageDefault: 'images/Mutt-Prods-BazzarBog-Huellitas-Res.jpg', isDynamic: false },
             { id: 'h-cerdo', category: 'Huellitas', name: 'Huellitas de Cerdo', flavor: 'cerdo', desc: 'Premia a tu mascota con salud.', variants: ['400'], imageDefault: 'images/Mutt-Prods-BazzarBog-Huellitas-Cerdo.jpg', isDynamic: false },
-            { id: 'c-pollo', category: 'Canittas', name: 'Canittas de Pollo', flavor: 'pollo', desc: 'Textura suave, ideal para todas las edades.', variants: ['250', '500'], imageDefault: 'images/Mutt-Prods-BazzarBog-Canittas-Pollo-250.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Canittas-Pollo-', isDynamic: true },
+            { id: 'c-pollo', category: 'Canittas', name: 'Canittas de Pollo', flavor: 'pollo', desc: 'Textura suave para todas las edades.', variants: ['250', '500'], imageDefault: 'images/Mutt-Prods-BazzarBog-Canittas-Pollo-250.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Canittas-Pollo-', isDynamic: true },
             { id: 'c-res', category: 'Canittas', name: 'Canittas de Res', flavor: 'res', desc: 'Nutrición balanceada en cada bocado.', variants: ['250', '500'], imageDefault: 'images/Mutt-Prods-BazzarBog-Canittas-Res-250.jpg', imageBase: 'images/Mutt-Prods-BazzarBog-Canittas-Res-', isDynamic: true },
-            { id: 'g-banquete', category: 'Gatos', name: 'Banquete Felino', flavor: 'salmon', desc: 'Especialmente formulado para gatos exigentes.', variants: ['250'], imageDefault: 'images/Mutt-Prods-BazzarBog-Gattos-BanqueteFelino-250g.jpg', isDynamic: false }
+            { id: 'g-banquete', category: 'Gatos', name: 'Banquete Felino', flavor: 'salmon', desc: 'Especial para gatos exigentes.', variants: ['250'], imageDefault: 'images/Mutt-Prods-BazzarBog-Gattos-BanqueteFelino-250g.jpg', isDynamic: false }
         ];
 
-        const grid = document.getElementById('product-grid');
+        let cart = JSON.parse(localStorage.getItem('mutt-cart')) || [];
 
         function renderProducts(filter) {
+            const grid = document.getElementById('product-grid');
             grid.innerHTML = ''; 
             const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
             filtered.forEach(product => {
@@ -388,7 +416,7 @@
                 card.innerHTML = `
                     <div class="img-placeholder">
                         <span class="meat-tag tag-${product.flavor}">${product.flavor}</span>
-                        <img src="${product.imageDefault}" alt="${product.name}" id="img-${product.id}" onerror="this.style.display='none'; this.parentElement.innerText='Imagen no encontrada'">
+                        <img src="${product.imageDefault}" alt="${product.name}" id="img-${product.id}" onerror="this.style.display='none'; this.parentElement.innerText='Imagen Mutt'">
                     </div>
                     <div class="card-body">
                         <div>
@@ -396,11 +424,8 @@
                             <p class="product-desc">${product.desc}</p>
                         </div>
                         <div>
-                            <label class="variant-label">Selecciona presentación:</label>
-                            <select class="variant-select" id="select-${product.id}" ${onSelectChange}>
-                                ${optionsHtml}
-                            </select>
-                            <button class="add-btn" onclick="addToCart('${product.name}', '${product.id}')">Añadir al Carrito</button>
+                            <select class="variant-select" id="select-${product.id}" ${onSelectChange}>${optionsHtml}</select>
+                            <button class="add-btn" onclick="addToCart('${product.id}')">Añadir al Carrito</button>
                         </div>
                     </div>
                 `;
@@ -410,26 +435,82 @@
 
         function changeProductImage(productId, imageBase, weight) {
             const imgElement = document.getElementById(`img-${productId}`);
-            if (imgElement) {
-                imgElement.src = `${imageBase}${weight}.jpg`;
-            }
+            if (imgElement) imgElement.src = `${imageBase}${weight}.jpg`;
         }
 
         function filterProducts(category) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             renderProducts(category);
         }
 
-        function addToCart(productName, productId) {
-            const select = document.getElementById(`select-${productId}`);
-            const presentation = select.value + 'g';
-            alert(`¡Genial! Has añadido al carrito:\n\n${productName}\nPresentación: ${presentation}`);
+        function toggleCart() {
+            document.getElementById('cart-drawer').classList.toggle('open');
+            document.getElementById('cart-overlay').classList.toggle('open');
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const weight = document.getElementById(`select-${productId}`).value;
+            const cartKey = `${productId}-${weight}`;
+            
+            const existingItem = cart.find(item => item.cartKey === cartKey);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cart.push({ cartKey, id: productId, name: product.name, weight: weight, qty: 1 });
+            }
+            updateCart();
+        }
+
+        function updateCart() {
+            localStorage.setItem('mutt-cart', JSON.stringify(cart));
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.getElementById('cart-count').innerText = count;
+            
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+            
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p>Presentación: ${item.weight}g</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="qty-btn" onclick="changeQty('${item.cartKey}', -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty('${item.cartKey}', 1)">+</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function changeQty(cartKey, delta) {
+            const item = cart.find(i => i.cartKey === cartKey);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) cart = cart.filter(i => i.cartKey !== cartKey);
+            }
+            updateCart();
+        }
+
+        function sendWhatsApp() {
+            if (cart.length === 0) return alert('El carrito está vacío');
+            let message = "¡Hola Mutt! 🐾 Quiero hacer el siguiente pedido:\n\n";
+            cart.forEach(item => {
+                message += `• ${item.name} (${item.weight}g) x${item.qty}\n`;
+            });
+            const url = `https://wa.me/573000000000?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts('all');
+            updateCart();
         });
     </script>
 </body>
